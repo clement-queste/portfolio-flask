@@ -1,7 +1,61 @@
 {% extends "base.html" %}
-
 {% block content %}
+
 <h2>Contact</h2>
-<p>Email : tonemail@email.com</p>
-<p>LinkedIn : linkedin.com/in/tonprofil</p>
+
+<div class="card">
+    <h3>📧 Informations de contact</h3>
+    <p><strong>Email :</strong> <a href="mailto:questeclement@gmail.com">questeclement@gmail.com</a></p>
+    <p><strong>LinkedIn :</strong> 
+        <a href="https://linkedin.com/in/tonprofil" target="_blank">
+            linkedin.com/in/tonprofil
+        </a>
+    </p>
+</div>
+
+<div class="card">
+    <h3>🎓 Mon parcours académique</h3>
+
+    <!-- Carte -->
+    <div id="map" style="height: 400px; border-radius: 10px;"></div>
+</div>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    var college = [50.5846741, 2.4075393];
+    var lycee = [50.5555375, 2.4782947];
+    var ulco = [50.9532083, 1.8787707];
+
+    var map = L.map("map").setView([50.698, 2.255], 10);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap",
+    }).addTo(map);
+
+    L.marker(college).addTo(map)
+        .bindPopup("<strong>Collège Bernard Chochoy</strong><br>Norrent-Fontes");
+
+    L.marker(lycee).addTo(map)
+        .bindPopup("<strong>Lycée Anatole France</strong><br>Lillers");
+
+    L.marker(ulco).addTo(map)
+        .bindPopup("<strong>ULCO</strong><br>Calais");
+
+    var parcours = L.polyline([college, lycee, ulco], {
+        color: '#4CAF50',
+        weight: 3,
+        dashArray: '10, 10'
+    }).addTo(map);
+
+    map.fitBounds(parcours.getBounds(), { padding: [50, 50] });
+</script>
+
+
+
+
 {% endblock %}

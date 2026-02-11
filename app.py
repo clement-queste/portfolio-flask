@@ -17,6 +17,12 @@ def projects():
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
+def afficher_ma_carte():  # On change 'map' en 'afficher_ma_carte'
+    return render_template("map.html")
+
+@app.route("/map")
+def afficher_ma_carte():  # On change 'map' en 'afficher_ma_carte'
+    return render_template("map.html")
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
